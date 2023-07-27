@@ -108,7 +108,7 @@ const setAlarmMain=()=>{
         setTimeout(()=>{
             audio.pause()
             audio.hidden = true;
-        },1500)
+        },15000)
     },1000*X)
 }
 

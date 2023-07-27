@@ -10,7 +10,7 @@ const h_alm = document.getElementById('h_alm')
 const m_alm = document.getElementById('m_alm')
 const s_alm = document.getElementById('s_alm')
 let CorrentTimeInSecond=0;
-
+let APM
 let audio = document.getElementById('myAudio')
 audio.hidden=true;
 
@@ -20,7 +20,7 @@ const inSec = ()=>{
     const M = DateNow.getMinutes();
     const S = DateNow.getSeconds();
     CorrentTimeInSecond = ((H * 60 * 60) + (M * 60) + S)
-    console.log(CorrentTimeInSecond)
+    //console.log(CorrentTimeInSecond)
     return CorrentTimeInSecond
 }
 
@@ -30,7 +30,7 @@ const DateNow = new Date();
 const H = DateNow.getHours();
 const M = DateNow.getMinutes();
 const S = DateNow.getSeconds();
-let APM = H>=12? 'PM' : 'AM';
+APM = H>=12? 'PM' : 'AM';
 if (H == 24) {
     H_1 = 12;
     APM = 'AM';
@@ -77,27 +77,59 @@ const alarm =() =>{
     if(ap=='PM'){
         h=h+12;
         s = s + (h*60*60) +(m*60);
-        console.log(s)
         return s;
     }else{
         s = s + (h*60 *60) + (m*60);
-        console.log(s)
         return s;
     }
 }
 
 const setAlarmLogic =()=>{
     let C_T = inSec()
+    //console.log("Actual Time: "+C_T) 
     let A_T = alarm()
-    let A_S = A_T - C_T
-    if (A_S<0)
+    //console.log("Alarm Time: " + A_T)
+    //APM = 'PM'
+    //console.log("Current AM / PM: " + APM + " Selected : " + ampm.value)
+    if(APM=='AM' && ampm.value=='PM') //IF Current Time Is AM and Alarm if for PM
     {
-        A_S += (24*60*60)
-        return(A_S)
-    }
-    else{
+        let A_S = A_T - C_T
+        //console.log("AT will bigger")
+        //console.log(A_S)
         return (A_S)
-    }  
+    } else if (APM == 'AM' && ampm.value == 'AM') {//IF Current Time Is AM and Alarm if for AM
+        if (A_T > C_T) {//IF Current Time Is AM and Alarm if for AM but Alarm Time is Bigger than Current Time
+            let A_S = A_T - C_T
+            //console.log("AT will bigger")
+            //console.log(A_S)
+            return (A_S)
+        }else{
+            let A_S = ((24 * 60 * 60) - C_T) + A_T //IF Current Time Is AM and Alarm if for AM but Alarm Time is lesser than Current Time
+            //console.log("AT will Smaller")
+            //console.log(A_S)
+            return (A_S)
+        }  
+    } else if (APM == 'PM' && ampm.value == 'AM'){
+        let A_S = ((24 * 60 * 60) - C_T) + A_T
+        //console.log("AT will Smaller")
+        //console.log(A_S)
+        return (A_S)
+    } else if (APM == 'PM' && ampm.value == 'PM'){
+        if (A_T > C_T) {
+            let A_S = A_T - C_T
+            //console.log("AT will bigger")
+            //console.log(A_S)
+            return (A_S)
+        }else{
+            let A_S = ((24 * 60 * 60) - C_T)+A_T
+            //console.log(A_S)
+            return (A_S)
+        }
+
+    }else{
+        alert("Something Went Wrong!")
+    }
+
 }
 
 const setAlarmMain=()=>{

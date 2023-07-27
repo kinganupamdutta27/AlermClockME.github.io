@@ -27,6 +27,7 @@ body {
     background-color: #4158D0 !important;
         background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%) !important;
     opacity: 1;
+    margin: 10px 15px;
 
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     border: 1.5px solid black;
@@ -89,4 +90,36 @@ h1{
 .button-64 i{
     margin-right: 8px;
     margin-left: 8px;
+}
+.input-group{
+    padding: 0px 0px;
+    margin: 15px 15px;
+    width: 200px;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+#btndiv{
+    margin-top: 15px;
+}
+#myAudiodiv{
+    margin-top: 15px;
+
+}
+.dropdown-menu{
+    width: 200px !important;
+    margin: 2px 0px !important;
+    padding: 5px 5px !important;
+    border: 2px solid #FF3706 !important;
+}
+#am{
+    background-color: #bec0c0;
+    font-size: large;
+    font-weight: bold;
+    color: black;
+}
+#pm {
+    background-color: #000000;
+    font-size: large;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
 }
